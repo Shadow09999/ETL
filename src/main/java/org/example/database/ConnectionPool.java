@@ -13,10 +13,10 @@ import java.util.Map;
 public class ConnectionPool {
     static final Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
-    static final String DRIVER_CLASS = "driverClass";
-    static final String JDBC_URL = "jdbcUrl";
-    static final String USER = "user";
-    static final String PASSWORD = "password";
+    static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
+    static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8";
+    static final String USER = "root";
+    static final String PASSWORD = "123456";
 
     // 当连接池满了 c3p0 一次性获取的连接数（默认值：3）
     static final String ACQUIRE_INCREMENT = "acquireIncrement";
@@ -59,6 +59,12 @@ public class ConnectionPool {
         cpds.setJdbcUrl(poolConfig.get(JDBC_URL));
         cpds.setUser(poolConfig.get(USER));
         cpds.setPassword(poolConfig.get(PASSWORD));
+
+	// 没有配置文件，直接写死
+        cpds.setDriverClass(DRIVER_CLASS);
+	cpds.setJdbcUrl(JDBC_URL);
+	cpds.setUser(USER);
+	cpds.setPassword(PASSWORD);
 
         // 可选（或者拥有默认值的项目）
         if (poolConfig.get(INITIAL_POOL_SIZE) != null)
