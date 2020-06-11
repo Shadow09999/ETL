@@ -42,6 +42,10 @@ public class DatabaseExtractor implements ETLExtractor {
         initial();
     }
 
+    public void releaseAll() {
+	ConnectionPool.releaseAll();
+    }
+
     private void initial() {
 
         String table = extractConfig.getTable();
